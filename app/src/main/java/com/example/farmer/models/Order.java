@@ -20,6 +20,9 @@ public class Order implements Serializable {
     @SerializedName("productId")
     public int productId;
 
+    @SerializedName("productName")
+    public String productName;
+
     @SerializedName("quantity")
     public int quantity;
 
@@ -42,6 +45,14 @@ public class Order implements Serializable {
     public String updatedAt;
 
     public Order() {
+    }
+
+    public String getProductName() {
+        return productName != null && !productName.isEmpty() ? productName : "Farm Products";
+    }
+
+    public void setProductName(String productName) {
+        this.productName = productName;
     }
 
     public Order(int buyerId, int farmerId, int productId, int quantity,

@@ -51,7 +51,12 @@ public class OrderAdapter extends RecyclerView.Adapter<OrderAdapter.OrderViewHol
     public void onBindViewHolder(@NonNull OrderViewHolder holder, int position) {
         Order order = orderList.get(position);
 
-        holder.orderIdTextView.setText("Order #" + order.getOrderId());
+        String prodName = order.getProductName();
+        if (prodName != null && !prodName.isEmpty()) {
+            holder.orderIdTextView.setText("Order #" + order.getOrderId() + " • " + prodName);
+        } else {
+            holder.orderIdTextView.setText("Order #" + order.getOrderId());
+        }
         holder.quantityTextView.setText("Qty: " + order.getQuantity());
         holder.priceTextView.setText("₹ " + String.format("%.2f", order.getTotalPrice()));
         holder.statusTextView.setText("Status: " + order.getOrderStatus());

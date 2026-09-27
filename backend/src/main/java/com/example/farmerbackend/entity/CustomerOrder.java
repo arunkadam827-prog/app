@@ -23,7 +23,7 @@ public class CustomerOrder {
  private String deliveryAddress;
  private LocalDateTime orderDate;
 
- @OneToMany(mappedBy = "order", cascade = CascadeType.ALL, orphanRemoval = true)
+ @OneToMany(mappedBy = "order", cascade = CascadeType.ALL, orphanRemoval = true, fetch = FetchType.EAGER)
  private List<OrderItem> items = new ArrayList<>();
 
  @PrePersist
@@ -66,4 +66,29 @@ public class CustomerOrder {
  public void setPaymentMethod(String paymentMethod) { this.paymentMethod = paymentMethod; }
  public double getTotalPrice() { return totalAmount; }
  public String getOrderStatus() { return status; }
+
+ public String getProductName() {
+  if (items != null && !items.isEmpty() && items.get(0).getProduct() != null) {
+   String first = items.get(0).getProduct().getProductName();
+   if (items.size() > 1) {
+    return first + " (+" + (items.size() - 1) + " more)";
+   }
+   return first;
+  }
+  return "Farm Fresh Products";
+ }
+
+ public Long getFarmerId() {
+  if (items != null && !items.isEmpty() && items.get(0).getProduct() != null) {
+   return items.get(0).getProduct().getFarmerId();
+  }
+  return null;
+ }
+
+ public Long getProductId() {
+  if (items != null && !items.isEmpty() && items.get(0).getProduct() != null) {
+   return (long) items.get(0).getProduct().getProductId();
+  }
+  return null;
+ }
 }

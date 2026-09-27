@@ -86,14 +86,17 @@ public class OrderService {
         return orderRepository.save(order);
     }
 
+    @Transactional(readOnly = true)
     public List<CustomerOrder> getAllOrders() {
         return orderRepository.findAll();
     }
 
+    @Transactional(readOnly = true)
     public List<CustomerOrder> getUserOrders(Long userId) {
         return orderRepository.findByUserUserIdOrderByOrderIdDesc(userId);
     }
 
+    @Transactional(readOnly = true)
     public CustomerOrder getOrder(Long orderId) {
         return orderRepository.findById(orderId)
                 .orElseThrow(() -> new RuntimeException("Order not found"));
