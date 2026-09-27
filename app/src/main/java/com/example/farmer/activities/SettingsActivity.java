@@ -12,7 +12,7 @@ import androidx.appcompat.app.AppCompatActivity;
 
 import com.example.farmer.R;
 
-public class settingsActivity extends AppCompatActivity {
+public class SettingsActivity extends AppCompatActivity {
 
         private Switch notificationSwitch;
         private Switch darkModeSwitch;
@@ -95,7 +95,7 @@ public class settingsActivity extends AppCompatActivity {
                 new com.example.farmer.utils.SessionManager(this).logout();
 
                 Intent intent = new Intent(
-                                settingsActivity.this,
+                                SettingsActivity.this,
                                 LoginActivity.class);
 
                 intent.setFlags(

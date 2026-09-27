@@ -1,6 +1,5 @@
 package com.example.farmer.fragments;
 
-import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
 import android.text.TextUtils;
@@ -21,7 +20,7 @@ import com.example.farmer.activities.AddProductActivity;
 import com.example.farmer.activities.EditProfileActivity;
 import com.example.farmer.activities.LoginActivity;
 import com.example.farmer.activities.OrdersActivity;
-import com.example.farmer.activities.settingsActivity;
+import com.example.farmer.activities.SettingsActivity;
 import com.example.farmer.activities.HelpSupportActivity;
 import com.example.farmer.models.Order;
 import com.example.farmer.models.User;
@@ -273,7 +272,7 @@ public class ProfileFragment extends Fragment {
 
                 if (settingsMenu != null) {
                         settingsMenu.setOnClickListener(
-                                        v -> startActivity(new Intent(requireContext(), settingsActivity.class)));
+                                        v -> startActivity(new Intent(requireContext(), SettingsActivity.class)));
                 }
 
                 if (helpMenu != null) {

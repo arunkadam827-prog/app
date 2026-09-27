@@ -60,7 +60,7 @@
             android:name=".activities.EditProfileActivity" />
         <activity
             android:exported="false"
-            android:name=".activities.settingsActivity" />
+            android:name=".activities.SettingsActivity" />
 
         <activity
             android:exported="false"
