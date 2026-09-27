@@ -2,11 +2,12 @@ package com.example.farmer.activities;
 
 import android.content.Intent;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
 import android.widget.TextView;
-
+import com.example.farmer.activities.SettingsActivity;
 import androidx.activity.OnBackPressedCallback;
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.ActionBarDrawerToggle;
@@ -33,6 +34,8 @@ import retrofit2.Callback;
 import retrofit2.Response;
 
 public class MainActivity extends AppCompatActivity {
+
+    private static final String TAG = "MainActivity";
 
     private DrawerLayout drawerLayout;
     private NavigationView navigationView;
@@ -61,7 +64,7 @@ public class MainActivity extends AppCompatActivity {
 
         bottomNavigationView = findViewById(R.id.bottom_navigation);
 
-        // 3. Updated Navigation Logic for all sections
+        // Updated Navigation Logic for all sections
         bottomNavigationView.setOnItemSelectedListener(item -> {
             Fragment selectedFragment = null;
             int id = item.getItemId();
@@ -71,7 +74,6 @@ public class MainActivity extends AppCompatActivity {
             } else if (id == R.id.nav_cart) {
                 selectedFragment = new CartFragment();
             } else if (id == R.id.nav_orders) {
-                // Opens the Buyer's order history
                 selectedFragment = new OrdersFragment();
             } else if (id == R.id.nav_profile) {
                 selectedFragment = new ProfileFragment();
@@ -108,18 +110,18 @@ public class MainActivity extends AppCompatActivity {
             fetchUserProfile(sessionManager.getUserId());
         }
 
-        // 7. Sidebar Navigation Listener Updated
+        // Sidebar Navigation Listener Updated
         navigationView.setNavigationItemSelectedListener(item -> {
             int id = item.getItemId();
 
             if (id == R.id.nav_logout) {
                 handleLogout();
             } else if (id == R.id.nav_settings) {
-                startActivity(new Intent(MainActivity.this, settingsActivity.class));
+                // FIX: Changed lowercase 'settingsActivity' to standard 'SettingsActivity'
+                startActivity(new Intent(MainActivity.this, SettingsActivity.class));
             } else if (id == R.id.nav_help) {
                 startActivity(new Intent(MainActivity.this, HelpSupportActivity.class));
             } else if (id == R.id.nav_browse) {
-                // Full marketplace now lives in a dedicated Activity.
                 startActivity(new Intent(MainActivity.this, ProductListActivity.class));
             } else {
                 // Synchronize sidebar clicks with bottom navigation
@@ -141,8 +143,6 @@ public class MainActivity extends AppCompatActivity {
     public boolean onOptionsItemSelected(@NonNull MenuItem item) {
         int id = item.getItemId();
         if (id == R.id.action_search) {
-            // "All products" now lives in a dedicated Activity (the fragment
-            // that used to duplicate Home browsing has been removed).
             startActivity(new Intent(MainActivity.this, ProductListActivity.class));
             return true;
         } else if (id == R.id.action_cart) {
@@ -178,14 +178,16 @@ public class MainActivity extends AppCompatActivity {
     private void fetchUserProfile(Long userId) {
         RetrofitClient.getApiService().getUserProfile(userId).enqueue(new Callback<User>() {
             @Override
-            public void onResponse(Call<User> call, Response<User> response) {
+            public void onResponse(@NonNull Call<User> call, @NonNull Response<User> response) {
                 if (response.isSuccessful() && response.body() != null) {
                     updateNavHeader(response.body());
                 }
             }
 
             @Override
-            public void onFailure(Call<User> call, Throwable t) {
+            public void onFailure(@NonNull Call<User> call, @NonNull Throwable t) {
+                // FIX: Added logging to diagnose network connection problems
+                Log.e(TAG, "Failed to fetch user profile data", t);
             }
         });
     }
