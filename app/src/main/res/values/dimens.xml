@@ -1,0 +1,47 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+
+    <!-- =========================================================
+         Farmer+  •  Spacing & sizing scale (4dp grid)
+         ========================================================= -->
+
+    <!-- Spacing -->
+    <dimen name="space_xxs">2dp</dimen>
+    <dimen name="space_xs">4dp</dimen>
+    <dimen name="space_sm">8dp</dimen>
+    <dimen name="space_md">12dp</dimen>
+    <dimen name="space_lg">16dp</dimen>
+    <dimen name="space_xl">20dp</dimen>
+    <dimen name="space_2xl">24dp</dimen>
+    <dimen name="space_3xl">32dp</dimen>
+    <dimen name="space_4xl">40dp</dimen>
+
+    <!-- Screen padding -->
+    <dimen name="screen_padding">20dp</dimen>
+
+    <!-- Corner radii -->
+    <dimen name="radius_xs">8dp</dimen>
+    <dimen name="radius_sm">12dp</dimen>
+    <dimen name="radius_md">16dp</dimen>
+    <dimen name="radius_lg">22dp</dimen>
+    <dimen name="radius_xl">28dp</dimen>
+    <dimen name="radius_pill">999dp</dimen>
+
+    <!-- Components -->
+    <dimen name="button_height">56dp</dimen>
+    <dimen name="input_height">58dp</dimen>
+    <dimen name="icon_size">24dp</dimen>
+    <dimen name="icon_size_sm">20dp</dimen>
+    <dimen name="avatar_lg">104dp</dimen>
+    <dimen name="avatar_md">56dp</dimen>
+
+    <!-- Legacy aliases -->
+    <dimen name="padding_small">8dp</dimen>
+    <dimen name="padding_medium">16dp</dimen>
+    <dimen name="padding_large">24dp</dimen>
+    <dimen name="text_small">12sp</dimen>
+    <dimen name="text_medium">16sp</dimen>
+    <dimen name="text_large">22sp</dimen>
+    <dimen name="text_title">28sp</dimen>
+
+</resources>

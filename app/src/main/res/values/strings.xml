@@ -1,0 +1,232 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+
+    <string name="app_name">Farmer+</string>
+
+    <string name="home">Home</string>
+    <string name="products">Products</string>
+    <string name="dashboard">Dashboard</string>
+    <string name="orders">Orders</string>
+    <string name="profile">Profile</string>
+    <string name="cart">Cart</string>
+
+    <string name="navigation_drawer_open">Open navigation drawer</string>
+    <string name="navigation_drawer_close">Close navigation drawer</string>
+
+    <!-- Authentication -->
+    <string name="welcome_back">Welcome back</string>
+    <string name="login_subtitle">Sign in to continue your fresh journey</string>
+    <string name="email">Email</string>
+    <string name="password">Password</string>
+    <string name="full_name">Full name</string>
+    <string name="phone">Phone number</string>
+    <string name="city">City</string>
+    <string name="address">Address</string>
+    <string name="login">Login</string>
+    <string name="sign_up">Sign up</string>
+    <string name="create_account">Create your account</string>
+    <string name="register_subtitle">Join thousands of farmers and buyers</string>
+    <string name="register">Register</string>
+    <string name="i_am_a">I am a</string>
+    <string name="farmer">Farmer</string>
+    <string name="buyer">Buyer</string>
+
+    <!-- Google Sign-In -->
+    <string name="continue_with_google">Continue with Google</string>
+    <string name="or_divider">or</string>
+    <string name="google_sign_in_failed">Google sign-in failed. Please try again.</string>
+    <string name="google_sign_in_cancelled">Google sign-in cancelled.</string>
+    <string name="google_web_client_missing">Google sign-in is not configured yet. Add your Web Client ID.</string>
+    <string name="google_credential_unavailable">Google Play Services is not available on this device.</string>
+    <string name="network_error">Network error. Check your connection.</string>
+
+    <!-- Actions -->
+    <string name="add_to_cart">Add to cart</string>
+    <string name="in_stock">In stock</string>
+    <string name="checkout">Checkout</string>
+    <string name="save_changes">Save changes</string>
+    <string name="logout">Logout</string>
+
+    <!-- Filters -->
+    <string name="search_products">Search for fresh produce…</string>
+    <string name="filters">Filters</string>
+    <string name="apply_filters">Apply filters</string>
+    <string name="reset">Reset</string>
+    <string name="sort">Sort</string>
+    <string name="clear_all">Clear all</string>
+
+    <!-- Home -->
+    <string name="home_greeting">Good to see you 👋</string>
+    <string name="home_headline">Farm fresh, delivered</string>
+    <string name="promo_title">Fresh from farms</string>
+    <string name="promo_subtitle">Get 20% off on your first order</string>
+    <string name="categories">Categories</string>
+    <string name="category_vegetables">Vegetables</string>
+    <string name="category_fruits">Fruits</string>
+    <string name="category_grains">Grains</string>
+    <string name="category_dairy">Dairy</string>
+    <string name="featured_products">Featured products</string>
+    <string name="best_sellers">Best sellers</string>
+    <string name="view_all">View all</string>
+
+    <!-- Filters sheet -->
+    <string name="filter_category">Category</string>
+    <string name="filter_price_range">Price range</string>
+    <string name="filter_min_price">Min price</string>
+    <string name="filter_max_price">Max price</string>
+    <string name="filter_sort_by">Sort by</string>
+    <string name="sort_relevance">Relevance</string>
+    <string name="sort_price_low_high">Price: Low to High</string>
+    <string name="sort_price_high_low">Price: High to Low</string>
+    <string name="sort_name_az">Name: A to Z</string>
+    <string name="categories_all">All</string>
+    <string name="filter_others">Others</string>
+    <string name="filter_no_results">Nothing here yet</string>
+    <string name="filter_no_results_subtitle">Try a different search or clear your filters.</string>
+    <string name="show_results">Show results</string>
+
+    <!-- Profile -->
+    <string name="my_products">My products</string>
+    <string name="my_orders">My orders</string>
+    <string name="favorites">Favorites</string>
+    <string name="settings">Settings</string>
+    <string name="help_support">Help and support</string>
+    <string name="edit_profile">Edit profile</string>
+    <string name="verified_farmer">Verified</string>
+    <string name="profile_rating">Rating</string>
+    <string name="profile_sold">Products sold</string>
+    <string name="profile_community">Community</string>
+    <string name="item_total">Item total</string>
+    <string name="quantity">Quantity</string>
+    <string name="remove">Remove</string>
+    <string name="order_id">Order</string>
+    <string name="order_date">Placed on</string>
+    <string name="order_status">Status</string>
+    <string name="order_amount">Amount</string>
+    <string name="order_address">Delivery address</string>
+    <string name="continue_shopping">Continue shopping</string>
+    <string name="navigate_back">Navigate back</string>
+    <string name="place_order">Place order</string>
+    <string name="cart_subtitle_hero">Fresh products waiting for you 🌱</string>
+    <string name="secure_checkout">🔒 Secure checkout • Fresh delivery</string>
+    <string name="cart_waiting">Your cart is waiting</string>
+    <string name="orders_subtitle_track">Track your purchases</string>
+    <string name="orders_recent">Recent orders</string>
+    <string name="status_pending">Pending</string>
+    <string name="status_delivered">Delivered</string>
+    <string name="status_cancelled">Cancelled</string>
+    <string name="update_status">Update status</string>
+
+    <!-- Cart & Orders -->
+    <string name="cart_empty">Your cart is empty</string>
+    <string name="cart_empty_subtitle">Browse the marketplace and add fresh produce.</string>
+    <string name="order_summary">Order summary</string>
+    <string name="subtotal">Subtotal</string>
+    <string name="delivery">Delivery</string>
+    <string name="total">Total</string>
+    <string name="orders_empty">No orders yet</string>
+    <string name="orders_empty_subtitle">Your placed orders will appear here.</string>
+
+    <!-- Farmer dashboard -->
+    <string name="farmer_dashboard">Farmer dashboard</string>
+    <string name="farmer_dashboard_subtitle">Manage your farm and marketplace</string>
+    <string name="farm_stats">Your farm stats</string>
+    <string name="quick_actions">Quick actions</string>
+    <string name="dashboard_revenue">Revenue</string>
+    <string name="dashboard_analytics">Analytics</string>
+    <string name="dashboard_marketplace">Marketplace</string>
+    <string name="dashboard_browse_buy">Browse and buy products</string>
+    <string name="dashboard_my_cart">My shopping cart</string>
+
+    <!-- Add product -->
+    <string name="add_product">Add product</string>
+    <string name="add_product_title">Add product</string>
+    <string name="product_name_label">Product name *</string>
+    <string name="product_name_hint">Enter product name</string>
+    <string name="description_label">Description</string>
+    <string name="description_hint">Enter product description</string>
+    <string name="category_label">Category *</string>
+    <string name="price_label">Price (₹) *</string>
+    <string name="price_hint">Enter price</string>
+    <string name="quantity_available_label">Quantity available *</string>
+    <string name="quantity_hint">Enter quantity</string>
+    <string name="upload_image">Upload image</string>
+    <string name="save_product">Save product</string>
+
+    <!-- Product list & detail -->
+    <string name="product_list_subtitle">Manage your farm products</string>
+    <string name="product_list_all">All products</string>
+    <string name="product_list_available">Available</string>
+    <string name="product_list_low_stock">Low stock</string>
+    <string name="product_detail_title">Product details</string>
+    <string name="product_detail_subtitle">View and manage product information</string>
+    <string name="product_detail_info">PRODUCT INFORMATION</string>
+
+    <!-- Checkout -->
+    <string name="checkout_title">Checkout and payment</string>
+    <string name="delivery_address">Delivery address</string>
+    <string name="receiver_name">Receiver name</string>
+    <string name="contact_phone">Contact phone</string>
+    <string name="street_address">Street address</string>
+    <string name="city_town">City / town</string>
+    <string name="order_items_subtotal">Items subtotal</string>
+    <string name="free_label">FREE</string>
+    <string name="total_amount">Total amount</string>
+    <string name="select_payment">Select payment method</string>
+    <string name="upi_option">UPI (Google Pay, PhonePe, Paytm, BHIM)</string>
+    <string name="card_option">Debit / credit card</string>
+    <string name="bank_option">Direct company bank account transfer</string>
+    <string name="cod_option">Cash on delivery (COD)</string>
+    <string name="copy">Copy</string>
+    <string name="beneficiary_details">Beneficiary details</string>
+    <string name="your_upi_id">Your UPI ID (e.g. yourname@okhdfcbank)</string>
+    <string name="card_number_hint">16-digit card number</string>
+    <string name="cardholder_name">Cardholder name</string>
+    <string name="expiry_hint">MM/YY</string>
+    <string name="cvv_hint">CVV</string>
+    <string name="utr_hint">Your 12-digit UTR / payment ref no.</string>
+    <string name="cod_note">Pay in cash directly to the delivery partner upon arrival 🌱</string>
+    <string name="pay_place_order">Pay and place order</string>
+    <string name="company_upi_label">Company UPI: 9356601104@upi</string>
+    <string name="company_upi_apps">GPay / PhonePe / Paytm: 9356601104</string>
+
+    <!-- Edit profile -->
+    <string name="edit_profile_title">Edit profile</string>
+    <string name="full_name_label">Full name</string>
+    <string name="full_name_hint">Enter full name</string>
+    <string name="email_label">Email</string>
+    <string name="phone_label">Phone number</string>
+    <string name="phone_hint">Enter phone number</string>
+    <string name="address_label">Address</string>
+    <string name="address_hint">Enter address</string>
+    <string name="city_label">City</string>
+    <string name="city_hint">Enter city</string>
+    <string name="save_profile">Save profile</string>
+
+    <!-- Settings -->
+    <string name="settings_title">Settings</string>
+    <string name="settings_general">General</string>
+    <string name="notifications">Notifications</string>
+    <string name="notifications_subtitle">Receive order and product notifications</string>
+    <string name="dark_mode">Dark mode</string>
+    <string name="dark_mode_subtitle">Use dark appearance</string>
+    <string name="settings_account">Account</string>
+    <string name="privacy_settings">Privacy settings</string>
+    <string name="language">Language</string>
+
+    <!-- Help & support -->
+    <string name="help_title">Help and support</string>
+    <string name="help_welcome">How can we help you?</string>
+    <string name="help_intro">Find answers to common questions or contact our support team for assistance.</string>
+    <string name="help_faq">Frequently asked questions</string>
+    <string name="help_contact">Contact support</string>
+    <string name="help_report">Report a problem</string>
+    <string name="help_info">Support information\n\nEmail: support@farmerapp.com\nWorking hours: Monday – Saturday\nTime: 9:00 AM – 6:00 PM</string>
+    <string name="app_version">Farmer+ v1.0</string>
+
+    <!-- Order success dialog -->
+    <string name="order_success_title">Order confirmed</string>
+    <string name="estimated_delivery">Estimated delivery: 2–3 business days</string>
+    <string name="view_my_orders">View my orders</string>
+
+</resources>

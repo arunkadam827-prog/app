@@ -1,0 +1,67 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+
+    <!-- =========================================================
+         Farmer+  •  New-Gen Design System  •  Colors
+         A fresh, natural, high-contrast palette built around
+         an emerald "harvest" green with warm amber accents.
+         ========================================================= -->
+
+    <!-- Brand / Primary -->
+    <color name="primary">#1B7F4B</color>
+    <color name="primary_dark">#0E5C34</color>
+    <color name="primary_light">#4CAF7D</color>
+    <color name="primary_surface">#E8F5EE</color>
+    <color name="primary_surface_strong">#D3ECDE</color>
+
+    <!-- Accent / Secondary (warm harvest amber) -->
+    <color name="accent">#F5A623</color>
+    <color name="accent_dark">#D88A0A</color>
+    <color name="accent_surface">#FFF4DE</color>
+
+    <!-- Semantic -->
+    <color name="success">#2E9E5B</color>
+    <color name="success_surface">#E4F5EA</color>
+    <color name="warning">#F2B01E</color>
+    <color name="warning_surface">#FEF6E2</color>
+    <color name="danger">#E5484D</color>
+    <color name="danger_surface">#FDECEC</color>
+    <color name="info">#3B82F6</color>
+    <color name="info_surface">#E8F1FE</color>
+
+    <!-- Neutrals -->
+    <color name="background">#F5F8F6</color>
+    <color name="surface">#FFFFFF</color>
+    <color name="surface_muted">#EDF2EF</color>
+    <color name="border">#E2EBE5</color>
+    <color name="divider">#EEF3F0</color>
+
+    <!-- Text -->
+    <color name="text_primary">#0F1B14</color>
+    <color name="text_secondary">#5C6B62</color>
+    <color name="text_tertiary">#8A9690</color>
+    <color name="text_on_primary">#FFFFFF</color>
+    <color name="text_hint">#9AA6A0</color>
+
+    <!-- Scrims / overlays -->
+    <color name="scrim">#66000000</color>
+    <color name="overlay_light">#1AFFFFFF</color>
+
+    <!-- Legacy aliases kept for backwards compatibility -->
+    <color name="colorPrimary">#1B7F4B</color>
+    <color name="colorPrimaryDark">#0E5C34</color>
+    <color name="colorAccent">#F5A623</color>
+
+    <color name="black">#FF000000</color>
+    <color name="white">#FFFFFFFF</color>
+    <color name="green">#FF1B7F4B</color>
+    <color name="blue">#FF3B82F6</color>
+
+    <!-- Default material placeholders -->
+    <color name="purple_200">#FFBB86FC</color>
+    <color name="purple_500">#FF6200EE</color>
+    <color name="purple_700">#FF3700B3</color>
+    <color name="teal_200">#FF03DAC5</color>
+    <color name="teal_700">#FF018786</color>
+
+</resources>

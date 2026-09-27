@@ -1,0 +1,21 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources xmlns:tools="http://schemas.android.com/tools">
+
+    <style name="Base.Theme.farmer" parent="Theme.Material3.DayNight.NoActionBar">
+        <!-- Keep the same brand identity in dark mode; surfaces are overridden
+             so the app remains legible while preserving the emerald accent. -->
+        <item name="colorPrimary">@color/primary_light</item>
+        <item name="colorOnPrimary">@color/text_primary</item>
+        <item name="colorSecondary">@color/accent</item>
+
+        <item name="android:statusBarColor">@color/primary_dark</item>
+        <item name="android:navigationBarColor">@color/surface</item>
+
+        <item name="materialButtonStyle">@style/Widget.Farmer.Button.Primary</item>
+        <item name="bottomNavigationStyle">@style/Widget.Farmer.BottomNav</item>
+    </style>
+
+    <style name="Theme.farmer" parent="Base.Theme.farmer">
+    </style>
+
+</resources>
