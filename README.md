@@ -136,7 +136,7 @@ The debug APK will be generated at:
 ## 💳 Company Payment Details
 - **Beneficiary**: Kisan Connect Agro Services Pvt. Ltd.
 - **Account Number**: `9356601104`
-- **UPI ID**: `9356601104@upi`
+- **UPI ID**: `9356601104@oksbi`
 - **Phone / GPay / PhonePe**: `9356601104`
 - **IFSC**: `HDFC0001234`
 - **Bank**: HDFC Bank, Commercial Agri Branch
