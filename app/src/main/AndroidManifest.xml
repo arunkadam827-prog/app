@@ -14,7 +14,6 @@
         android:theme="@style/Theme.farmer"
         android:usesCleartextTraffic="true">
 
-
         <!-- Main / Launcher Activity -->
         <activity
             android:exported="true"

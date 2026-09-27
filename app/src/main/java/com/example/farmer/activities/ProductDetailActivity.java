@@ -108,6 +108,8 @@ public class ProductDetailActivity extends AppCompatActivity {
             Glide.with(this).load(imageUrl)
                     .placeholder(R.drawable.ic_home)
                     .error(R.drawable.ic_home)
+                    .fallback(R.drawable.ic_home)
+                    .centerCrop()
                     .into(image);
         }
         container.addView(image);

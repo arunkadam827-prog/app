@@ -85,6 +85,8 @@ public class ProductAdapter extends RecyclerView.Adapter<ProductAdapter.ProductV
                     .load(imageUrl)
                     .placeholder(R.drawable.ic_home)
                     .error(R.drawable.ic_home)
+                    .fallback(R.drawable.ic_home)
+                    .centerCrop()
                     .into(holder.img);
         }
 

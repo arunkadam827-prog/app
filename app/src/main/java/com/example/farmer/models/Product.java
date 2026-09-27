@@ -95,7 +95,33 @@ public class Product implements Serializable {
     public int getQuantityAvailable() { return quantityAvailable; }
     public void setQuantityAvailable(int quantityAvailable) { this.quantityAvailable = quantityAvailable; }
 
-    public String getCategory() { return category; }
+    public String getCategory() {
+        if (category == null || category.trim().isEmpty()) {
+            return inferCategory(productName);
+        }
+        return category;
+    }
+
+    private static String inferCategory(String name) {
+        if (name == null) return "Vegetables";
+        String lower = name.toLowerCase();
+        if (lower.contains("apple") || lower.contains("banana") || lower.contains("mango")
+                || lower.contains("orange") || lower.contains("grape") || lower.contains("guava")
+                || lower.contains("papaya") || lower.contains("pineapple") || lower.contains("watermelon")
+                || lower.contains("fruit") || lower.contains("berry")) {
+            return "Fruits";
+        }
+        if (lower.contains("milk") || lower.contains("paneer") || lower.contains("cheese")
+                || lower.contains("butter") || lower.contains("ghee") || lower.contains("curd")
+                || lower.contains("dairy")) {
+            return "Dairy";
+        }
+        if (lower.contains("wheat") || lower.contains("rice") || lower.contains("grain")
+                || lower.contains("dal") || lower.contains("pulse") || lower.contains("flour")) {
+            return "Grains";
+        }
+        return "Vegetables";
+    }
     public void setCategory(String category) { this.category = category; }
 
     public String getImageUrl() { return imageUrl; }
