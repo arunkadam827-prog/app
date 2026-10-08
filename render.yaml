@@ -1,0 +1,46 @@
+# Render.com Blueprint — deploys the Farmer backend + free PostgreSQL.
+# Docs: https://render.com/docs/blueprint-spec
+#
+# Deploy: push this repo to GitHub → Render Dashboard → New → Blueprint →
+# select the repo → Apply. Render reads this file automatically.
+
+databases:
+  - name: farmer-db
+    databaseName: farmerdb
+    user: farmer
+    plan: free
+
+services:
+  - type: web
+    name: farmer-backend
+    runtime: docker
+    dockerfilePath: ./backend/Dockerfile
+    dockerContext: ./backend
+    plan: free
+    healthCheckPath: /api/products
+    autoDeploy: true
+    envVars:
+      - key: DATABASE_URL
+        fromDatabase:
+          name: farmer-db
+          property: connectionString
+      - key: SPRING_DATASOURCE_USERNAME
+        fromDatabase:
+          name: farmer-db
+          property: user
+      - key: SPRING_DATASOURCE_PASSWORD
+        fromDatabase:
+          name: farmer-db
+          property: password
+      - key: SPRING_JPA_HIBERNATE_DDL_AUTO
+        value: update
+      - key: AI_ENABLED
+        value: "true"
+      - key: AI_API_KEY
+        sync: false
+      - key: AI_BASE_URL
+        value: https://agentrouter.org/v1
+      - key: AI_MODEL
+        value: deepseek-v4-flash
+      - key: GOOGLE_CLIENT_ID
+        value: ""

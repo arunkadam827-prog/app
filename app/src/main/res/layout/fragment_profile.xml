@@ -654,6 +654,18 @@
 
         <!-- ================= ACTIONS ================= -->
         <com.google.android.material.button.MaterialButton
+            android:id="@+id/switch_role_button"
+            style="@style/Widget.Farmer.Button.Primary"
+            android:layout_width="match_parent"
+            android:layout_height="@dimen/button_height"
+            android:layout_marginStart="@dimen/screen_padding"
+            android:layout_marginTop="@dimen/space_xl"
+            android:layout_marginEnd="@dimen/screen_padding"
+            android:text="👨‍🌾 Switch to Farmer Dashboard"
+            app:icon="@drawable/ic_leaf"
+            app:iconGravity="textStart" />
+
+        <com.google.android.material.button.MaterialButton
             android:id="@+id/edit_profile_button"
             style="@style/Widget.Farmer.Button.Primary"
             android:layout_width="match_parent"

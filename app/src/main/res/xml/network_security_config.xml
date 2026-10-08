@@ -1,7 +1,11 @@
 <?xml version="1.0" encoding="utf-8"?>
 <network-security-config>
-    <domain-config cleartextTrafficPermitted="true">
-        <!-- The alias 10.0.2.2 points to your host machine's loopback -->
-        <domain includeSubdomains="true">10.0.2.2</domain>
-    </domain-config>
+    <!-- Allow cleartext (http) traffic to any address. Required because the
+         backend runs on a local PC reached over LAN via http://<PC_IP>:8080.
+         For production, host the backend behind https and remove this. -->
+    <base-config cleartextTrafficPermitted="true">
+        <trust-anchors>
+            <certificates src="system" />
+        </trust-anchors>
+    </base-config>
 </network-security-config>

@@ -180,6 +180,32 @@
                 app:chipCornerRadius="@dimen/radius_pill" />
 
             <com.google.android.material.chip.Chip
+                android:id="@+id/filter_farm_direct"
+                style="@style/Widget.MaterialComponents.Chip.Choice"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:checkable="true"
+                android:text="🌱 Farm Direct"
+                android:textColor="@color/selector_chip_text"
+                android:textStyle="bold"
+                app:checkedIconVisible="false"
+                app:chipBackgroundColor="@color/selector_chip_bg"
+                app:chipCornerRadius="@dimen/radius_pill" />
+
+            <com.google.android.material.chip.Chip
+                android:id="@+id/filter_farmer_products"
+                style="@style/Widget.MaterialComponents.Chip.Choice"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:checkable="true"
+                android:text="👨‍🌾 Farmer Products"
+                android:textColor="@color/selector_chip_text"
+                android:textStyle="bold"
+                app:checkedIconVisible="false"
+                app:chipBackgroundColor="@color/selector_chip_bg"
+                app:chipCornerRadius="@dimen/radius_pill" />
+
+            <com.google.android.material.chip.Chip
                 android:id="@+id/filter_vegetables"
                 style="@style/Widget.MaterialComponents.Chip.Choice"
                 android:layout_width="wrap_content"

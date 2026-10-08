@@ -19,6 +19,18 @@ public class Product implements Serializable {
     @SerializedName(value = "farmerName", alternate = {"sellerName"})
     public String farmerName;
 
+    @SerializedName("farmerPhone")
+    public String farmerPhone;
+
+    @SerializedName("farmerCity")
+    public String farmerCity;
+
+    @SerializedName("farmerAddress")
+    public String farmerAddress;
+
+    @SerializedName(value = "directFromFarm", alternate = {"isDirectFromFarm"})
+    public boolean directFromFarm = true;
+
     // Product information
     @SerializedName("productName")
     public String productName;
@@ -80,8 +92,30 @@ public class Product implements Serializable {
     public int getFarmerId() { return farmerId; }
     public void setFarmerId(int farmerId) { this.farmerId = farmerId; }
 
-    public String getFarmerName() { return farmerName; }
+    public String getFarmerName() { return farmerName != null ? farmerName : "Kisan Producer"; }
     public void setFarmerName(String farmerName) { this.farmerName = farmerName; }
+
+    public String getFarmerPhone() {
+        return farmerPhone != null && !farmerPhone.trim().isEmpty() ? farmerPhone : "9356601104";
+    }
+    public void setFarmerPhone(String farmerPhone) { this.farmerPhone = farmerPhone; }
+
+    public String getFarmerCity() {
+        return farmerCity != null && !farmerCity.trim().isEmpty() ? farmerCity : "Sangli";
+    }
+    public void setFarmerCity(String farmerCity) { this.farmerCity = farmerCity; }
+
+    public String getFarmerAddress() {
+        return farmerAddress != null ? farmerAddress : "Direct Farm";
+    }
+    public void setFarmerAddress(String farmerAddress) { this.farmerAddress = farmerAddress; }
+
+    public boolean isDirectFromFarm() {
+        return directFromFarm;
+    }
+    public void setDirectFromFarm(boolean directFromFarm) {
+        this.directFromFarm = directFromFarm;
+    }
 
     public String getProductName() { return productName; }
     public void setProductName(String productName) { this.productName = productName; }

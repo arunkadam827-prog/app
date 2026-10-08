@@ -133,9 +133,7 @@ public class RegistrationActivity extends AppCompatActivity {
                     public void onFailure(@NonNull Call<LoginResponse> call, @NonNull Throwable t) {
                         setLoading(false);
                         Log.e(TAG, "Google sign-up network failure", t);
-                        Toast.makeText(RegistrationActivity.this,
-                                "Cannot reach the server. Check your connection.",
-                                Toast.LENGTH_LONG).show();
+                        showNetworkError();
                     }
                 });
     }
@@ -225,8 +223,7 @@ public class RegistrationActivity extends AppCompatActivity {
             public void onFailure(@NonNull Call<User> call, @NonNull Throwable t) {
                 setLoading(false);
                 Log.e(TAG, "Network failure", t);
-                Toast.makeText(RegistrationActivity.this,
-                        "Network error. Check your connection.", Toast.LENGTH_SHORT).show();
+                showNetworkError();
             }
         });
     }
@@ -267,6 +264,18 @@ public class RegistrationActivity extends AppCompatActivity {
         if (progressBar != null) {
             progressBar.setVisibility(isLoading ? View.VISIBLE : View.GONE);
         }
+    }
+
+    /**
+     * Friendly, actionable message when the backend cannot be reached.
+     * The most common cause on a real phone is a wrong/unreachable server URL.
+     */
+    private void showNetworkError() {
+        Toast.makeText(this,
+                "Cannot reach the server.\n\nFix: Settings → Server URL → enter the "
+                        + "backend address (e.g. http://"
+                        + "192.168.1.5:8080). Phone and PC must be on the same Wi-Fi.",
+                Toast.LENGTH_LONG).show();
     }
 
     private void handleErrorResponse(Response<User> response) {

@@ -28,10 +28,10 @@ android {
     buildTypes {
         debug {
             isMinifyEnabled = false
-            // LAN IP of this PC (Intel Wi-Fi 6E), so physical phones on the same
-            // Wi-Fi can reach the Spring Boot backend. For the emulator use
-            // http://10.0.2.2:8080/ instead.
-            buildConfigField("String", "API_BASE_URL", "\"http://10.205.155.102:8080/\"")
+            // Fallback only. The emulator automatically uses http://10.0.2.2:8080/
+            // (host loopback). On a real phone, set the PC's IP in the app:
+            // Settings → Server URL → enter http://<PC_IP>:8080
+            buildConfigField("String", "API_BASE_URL", "\"http://10.0.2.2:8080/\"")
             // Replace with your Google OAuth *Web* client ID from the Google Cloud console.
             buildConfigField("String", "GOOGLE_WEB_CLIENT_ID", "\"REPLACE_WITH_YOUR_GOOGLE_WEB_CLIENT_ID.apps.googleusercontent.com\"")
         }
@@ -45,8 +45,10 @@ android {
                 getDefaultProguardFile("proguard-android-optimize.txt"),
                 "proguard-rules.pro"
             )
-            // For physical device - CHANGE YOUR_IP to your actual server IP
-            buildConfigField("String", "API_BASE_URL", "\"http://192.168.1.100:8080/\"")
+            // Fallback only. On a real phone, set the backend address in the app:
+            // Settings → Server URL → enter http://<PC_IP>:8080
+            // (Phone and PC must be on the same Wi-Fi network.)
+            buildConfigField("String", "API_BASE_URL", "\"http://10.0.2.2:8080/\"")
             // Replace with your Google OAuth *Web* client ID from the Google Cloud console.
             buildConfigField("String", "GOOGLE_WEB_CLIENT_ID", "\"REPLACE_WITH_YOUR_GOOGLE_WEB_CLIENT_ID.apps.googleusercontent.com\"")
         }

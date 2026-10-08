@@ -1,4 +1,5 @@
 <?xml version="1.0" encoding="utf-8"?>
+
 <resources>
 
     <!-- =========================================================
@@ -28,6 +29,7 @@
     <color name="danger_surface">#FDECEC</color>
     <color name="info">#3B82F6</color>
     <color name="info_surface">#E8F1FE</color>
+    <color name="whatsapp">#25D366</color>
 
     <!-- Neutrals -->
     <color name="background">#F5F8F6</color>
@@ -64,4 +66,59 @@
     <color name="teal_200">#FF03DAC5</color>
     <color name="teal_700">#FF018786</color>
 
+
+    <!-- Your existing colors -->
+    <!-- <color name="primary">#4CAF50</color> -->
+
+    <!-- <color name="text_primary">#212121</color> -->
+
+    <!-- <color name="text_secondary">#757575</color> -->
+
+    
+    <!-- ADD THIS LINE if it's missing -->
+    <!-- <color name="text_tertiary">#9E9E9E</color> -->
+
+    <!-- Your existing colors -->
+    <!-- <color name="primary">#4CAF50</color> -->
+
+    <!-- <color name="text_primary">#212121</color> -->
+
+    <!-- <color name="text_secondary">#757575</color> -->
+
+    
+    <!-- ADD THIS LINE if it's missing -->
+    <!-- <color name="text_tertiary">#9E9E9E</color> -->
+
+    <!-- Your existing colors -->
+    <!-- <color name="primary">#4CAF50</color> -->
+
+    <!-- <color name="text_primary">#212121</color> -->
+
+    <!-- <color name="text_secondary">#757575</color> -->
+
+    
+    <!-- ADD THIS LINE if it's missing -->
+    <!-- <color name="text_tertiary">#9E9E9E</color> -->
+
+    <!-- Your existing colors -->
+    <!-- <color name="primary">#4CAF50</color> -->
+
+    <!-- <color name="text_primary">#212121</color> -->
+
+    <!-- <color name="text_secondary">#757575</color> -->
+
+    
+    <!-- ADD THIS LINE if it's missing -->
+    <!-- <color name="text_tertiary">#9E9E9E</color> -->
+
+    <!-- Your existing colors -->
+    <!-- <color name="primary">#4CAF50</color> -->
+
+    <!-- <color name="text_primary">#212121</color> -->
+
+    <!-- <color name="text_secondary">#757575</color> -->
+
+    
+    <!-- ADD THIS LINE if it's missing -->
+    <!-- <color name="text_tertiary">#9E9E9E</color> -->
 </resources>

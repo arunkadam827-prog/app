@@ -122,12 +122,10 @@ public class LoginActivity extends AppCompatActivity {
                         if (response.isSuccessful() && response.body() != null
                                 && response.body().isSuccess() && response.body().getUser() != null) {
                             User user = response.body().getUser();
-                            if (user.getUserType() == null) {
-                                showError("Server configuration error: account type missing");
-                                return;
-                            }
+                            String chosenRole = farmerRadio != null && farmerRadio.isChecked() ? "FARMER" : "BUYER";
+                            user.setUserType(chosenRole);
                             sessionManager.createLoginSession(user);
-                            navigateToDashboard(user.getUserType());
+                            navigateToDashboard(chosenRole);
                         } else {
                             String message = response.body() != null ? response.body().getMessage() : null;
                             showError(
@@ -139,7 +137,7 @@ public class LoginActivity extends AppCompatActivity {
                     public void onFailure(@NonNull Call<LoginResponse> call, @NonNull Throwable t) {
                         setLoading(false);
                         Log.e(TAG, "Google sign-in network failure", t);
-                        showError("Cannot reach the server. Check your connection.");
+                        showNetworkError();
                     }
                 });
     }
@@ -209,14 +207,10 @@ public class LoginActivity extends AppCompatActivity {
 
                     if (loginResponse.isSuccess() && loginResponse.getUser() != null) {
                         User user = loginResponse.getUser();
-
-                        if (user.getUserType() == null) {
-                            showError("Server configuration error: account type missing");
-                            return;
-                        }
-
+                        String chosenRole = farmerRadio != null && farmerRadio.isChecked() ? "FARMER" : "BUYER";
+                        user.setUserType(chosenRole);
                         sessionManager.createLoginSession(user);
-                        navigateToDashboard(user.getUserType());
+                        navigateToDashboard(chosenRole);
                     } else {
                         String message = loginResponse.getMessage();
                         showError(!TextUtils.isEmpty(message) ? message : "Invalid email or password");
@@ -230,9 +224,19 @@ public class LoginActivity extends AppCompatActivity {
             public void onFailure(@NonNull Call<LoginResponse> call, @NonNull Throwable t) {
                 setLoading(false);
                 Log.e(TAG, "Network failure", t);
-                showError("Cannot reach the server. Check your connection.");
+                showNetworkError();
             }
         });
+    }
+
+    /**
+     * Friendly, actionable message when the backend cannot be reached.
+     * The most common cause on a real phone is a wrong/unreachable server URL.
+     */
+    private void showNetworkError() {
+        showError("Cannot reach the server.\n\nFix: Settings → Server URL → enter the "
+                + "backend address (e.g. http://192.168.1.5:8080). "
+                + "Phone and PC must be on the same Wi-Fi.");
     }
 
     private void navigateToDashboard(String userType) {

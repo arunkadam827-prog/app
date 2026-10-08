@@ -83,12 +83,20 @@
     </LinearLayout>
 
     <!-- Dynamic product content -->
-    <FrameLayout
-        android:id="@+id/content_container"
+    <ScrollView
         android:layout_width="match_parent"
         android:layout_height="0dp"
         android:layout_weight="1"
-        android:paddingHorizontal="@dimen/space_lg"
-        android:paddingBottom="@dimen/space_lg" />
+        android:fillViewport="true"
+        android:scrollbars="vertical">
+
+        <LinearLayout
+            android:id="@+id/content_container"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical"
+            android:paddingHorizontal="@dimen/space_lg"
+            android:paddingBottom="@dimen/space_lg" />
+    </ScrollView>
 
 </LinearLayout>

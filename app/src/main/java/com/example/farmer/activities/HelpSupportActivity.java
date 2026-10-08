@@ -1,5 +1,6 @@
 package com.example.farmer.activities;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.widget.Button;
 import android.widget.Toast;
@@ -24,6 +25,10 @@ public class HelpSupportActivity extends AppCompatActivity {
                 reportButton = findViewById(R.id.report_problem_button);
 
                 findViewById(R.id.back_button).setOnClickListener(v -> finish());
+
+                // Kisan AI — live AI customer support / chatbot
+                findViewById(R.id.ai_support_button).setOnClickListener(v ->
+                                startActivity(new Intent(this, AiChatActivity.class)));
 
                 faqButton.setOnClickListener(v -> Toast.makeText(
                                 this,

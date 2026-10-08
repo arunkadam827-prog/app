@@ -24,6 +24,7 @@ public class ProductAdapter extends RecyclerView.Adapter<ProductAdapter.ProductV
     private List<Product> productList = new ArrayList<>();
     private final OnAddToCartClickListener cartListener;
     private OnProductClickListener productClickListener;
+    private OnContactFarmerClickListener contactFarmerListener;
 
     public interface OnAddToCartClickListener {
         void onAddToCart(Product product);
@@ -33,6 +34,11 @@ public class ProductAdapter extends RecyclerView.Adapter<ProductAdapter.ProductV
         void onProductClick(Product product);
     }
 
+    /** Fired when the user taps "Contact Farmer" on a farm-direct product card. */
+    public interface OnContactFarmerClickListener {
+        void onContactFarmer(Product product);
+    }
+
     public ProductAdapter(Context context, OnAddToCartClickListener cartListener) {
         this.context = context;
         this.cartListener = cartListener;
@@ -40,6 +46,10 @@ public class ProductAdapter extends RecyclerView.Adapter<ProductAdapter.ProductV
 
     public void setOnProductClickListener(OnProductClickListener listener) {
         this.productClickListener = listener;
+    }
+
+    public void setOnContactFarmerClickListener(OnContactFarmerClickListener listener) {
+        this.contactFarmerListener = listener;
     }
 
     @NonNull
@@ -90,13 +100,38 @@ public class ProductAdapter extends RecyclerView.Adapter<ProductAdapter.ProductV
                     .into(holder.img);
         }
 
-        holder.addBtn.setOnClickListener(v -> {
+        if (holder.farmerName != null) {
+            String farmer = p.getFarmerName();
+            holder.farmerName.setText(farmer != null && !farmer.isEmpty() ? "👨‍🌾 " + farmer : "🏢 Company Verified");
+        }
 
-            if (cartListener != null) {
-                cartListener.onAddToCart(p);
-            }
+        if (holder.badgeDirect != null) {
+            holder.badgeDirect.setVisibility(p.isDirectFromFarm() ? View.VISIBLE : View.GONE);
+        }
 
-        });
+        // ── Toggle between "Add to Cart" and "Contact Farmer" ──
+        boolean isFarmDirect = p.isDirectFromFarm();
+
+        if (holder.addBtn != null) {
+            holder.addBtn.setVisibility(isFarmDirect ? View.GONE : View.VISIBLE);
+            holder.addBtn.setOnClickListener(v -> {
+                if (cartListener != null) {
+                    cartListener.onAddToCart(p);
+                }
+            });
+        }
+
+        if (holder.contactFarmerBtn != null) {
+            holder.contactFarmerBtn.setVisibility(isFarmDirect ? View.VISIBLE : View.GONE);
+            holder.contactFarmerBtn.setOnClickListener(v -> {
+                if (contactFarmerListener != null) {
+                    contactFarmerListener.onContactFarmer(p);
+                } else if (productClickListener != null) {
+                    // Fallback: open product detail (shows farmer + product info)
+                    productClickListener.onProductClick(p);
+                }
+            });
+        }
 
         // Tapping the card opens the product detail / buy screen.
         holder.itemView.setOnClickListener(v -> {
@@ -125,8 +160,8 @@ public class ProductAdapter extends RecyclerView.Adapter<ProductAdapter.ProductV
             extends RecyclerView.ViewHolder {
 
         ImageView img;
-        TextView name, price, category, qty;
-        Button addBtn;
+        TextView name, price, category, qty, farmerName, badgeDirect;
+        Button addBtn, contactFarmerBtn;
 
         public ProductViewHolder(@NonNull View v) {
             super(v);
@@ -136,7 +171,10 @@ public class ProductAdapter extends RecyclerView.Adapter<ProductAdapter.ProductV
             price = v.findViewById(R.id.product_price);
             category = v.findViewById(R.id.product_category);
             qty = v.findViewById(R.id.product_quantity);
+            farmerName = v.findViewById(R.id.product_farmer_name);
+            badgeDirect = v.findViewById(R.id.badge_farm_direct);
             addBtn = v.findViewById(R.id.btn_add_to_cart);
+            contactFarmerBtn = v.findViewById(R.id.btn_contact_farmer);
         }
     }
 }

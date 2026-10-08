@@ -86,6 +86,15 @@
                 android:layout_marginBottom="@dimen/space_xl"
                 android:text="@string/help_intro" />
 
+            <com.google.android.material.button.MaterialButton
+                android:id="@+id/ai_support_button"
+                style="@style/Widget.Farmer.Button.Primary"
+                android:layout_width="match_parent"
+                android:layout_marginBottom="@dimen/space_md"
+                android:text="@string/ai_open"
+                app:icon="@drawable/ic_ai"
+                app:iconGravity="textStart" />
+
             <Button
                 android:id="@+id/faq_button"
                 style="@style/Widget.Farmer.Button.Secondary"

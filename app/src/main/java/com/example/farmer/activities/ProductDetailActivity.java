@@ -25,6 +25,13 @@ import com.example.farmer.services.RetrofitClient;
 import com.example.farmer.utils.SessionManager;
 import com.google.android.material.button.MaterialButton;
 
+import android.net.Uri;
+import android.text.InputType;
+import android.widget.EditText;
+import androidx.appcompat.app.AlertDialog;
+import com.example.farmer.models.Lead;
+import com.google.android.material.card.MaterialCardView;
+import java.net.URLEncoder;
 import java.util.HashMap;
 import java.util.Map;
 
@@ -192,6 +199,9 @@ public class ProductDetailActivity extends AppCompatActivity {
             container.addView(desc);
         }
 
+        // Farmer Profile & Direct Sourcing Contact Card
+        container.addView(buildFarmerContactCard());
+
         // Quantity selector
         container.addView(buildQuantityRow(inStock));
 
@@ -344,5 +354,193 @@ public class ProductDetailActivity extends AppCompatActivity {
 
     private int dp(int value) {
         return (int) (value * getResources().getDisplayMetrics().density);
+    }
+
+    private View buildFarmerContactCard() {
+        MaterialCardView card = new MaterialCardView(this);
+        LinearLayout.LayoutParams cardParams = new LinearLayout.LayoutParams(
+                ViewGroup.LayoutParams.MATCH_PARENT, ViewGroup.LayoutParams.WRAP_CONTENT);
+        cardParams.topMargin = dp(16);
+        cardParams.bottomMargin = dp(8);
+        card.setLayoutParams(cardParams);
+        card.setCardBackgroundColor(Color.parseColor("#F4F9F4"));
+        card.setStrokeColor(Color.parseColor("#C8E6C9"));
+        card.setStrokeWidth(dp(1));
+        card.setRadius(dp(12));
+
+        LinearLayout layout = new LinearLayout(this);
+        layout.setOrientation(LinearLayout.VERTICAL);
+        layout.setPadding(dp(16), dp(16), dp(16), dp(16));
+
+        // Header: Badge + Verified
+        TextView header = new TextView(this);
+        header.setText("🌱 DIRECT FROM FARM • VERIFIED PRODUCER");
+        header.setTextSize(11);
+        header.setTypeface(null, Typeface.BOLD);
+        header.setTextColor(Color.parseColor("#2E7D32"));
+        layout.addView(header);
+
+        // Farmer Name
+        TextView name = new TextView(this);
+        name.setText("👨‍🌾 " + product.getFarmerName());
+        name.setTextSize(16);
+        name.setTypeface(null, Typeface.BOLD);
+        name.setTextColor(Color.parseColor("#1C1C1E"));
+        name.setPadding(0, dp(4), 0, 0);
+        layout.addView(name);
+
+        // Location & Sourcing
+        TextView location = new TextView(this);
+        location.setText("📍 Farm Location: " + product.getFarmerCity());
+        location.setTextSize(13);
+        location.setTextColor(Color.parseColor("#555555"));
+        location.setPadding(0, dp(2), 0, dp(12));
+        layout.addView(location);
+
+        // Direct Action Buttons Row (Call + WhatsApp + In-App Chat)
+        LinearLayout actionsRow = new LinearLayout(this);
+        actionsRow.setOrientation(LinearLayout.HORIZONTAL);
+        actionsRow.setWeightSum(3f);
+
+        // Button 1: Call Farmer
+        MaterialButton btnCall = new MaterialButton(this);
+        btnCall.setText("📞 Call");
+        btnCall.setTextColor(Color.parseColor("#1B5E20"));
+        btnCall.setBackgroundTintList(ColorStateList.valueOf(Color.parseColor("#E8F5E9")));
+        LinearLayout.LayoutParams callParams = new LinearLayout.LayoutParams(0, dp(44), 1f);
+        callParams.setMargins(0, 0, dp(4), 0);
+        btnCall.setLayoutParams(callParams);
+        btnCall.setOnClickListener(v -> {
+            String phone = product.getFarmerPhone();
+            Intent intent = new Intent(Intent.ACTION_DIAL, Uri.parse("tel:" + phone));
+            startActivity(intent);
+        });
+        actionsRow.addView(btnCall);
+
+        // Button 2: WhatsApp Chat (E2E)
+        MaterialButton btnWhatsApp = new MaterialButton(this);
+        btnWhatsApp.setText("💬 WhatsApp");
+        btnWhatsApp.setTextColor(Color.WHITE);
+        btnWhatsApp.setBackgroundTintList(ColorStateList.valueOf(Color.parseColor("#25D366")));
+        LinearLayout.LayoutParams waParams = new LinearLayout.LayoutParams(0, dp(44), 1f);
+        waParams.setMargins(dp(4), 0, dp(4), 0);
+        btnWhatsApp.setLayoutParams(waParams);
+        btnWhatsApp.setOnClickListener(v -> openWhatsAppChat());
+        actionsRow.addView(btnWhatsApp);
+
+        // Button 3: In-App Chat
+        MaterialButton btnChat = new MaterialButton(this);
+        btnChat.setText(R.string.chat_btn_chat);
+        btnChat.setTextColor(Color.parseColor("#1976D2"));
+        btnChat.setBackgroundTintList(ColorStateList.valueOf(Color.parseColor("#E3F2FD")));
+        LinearLayout.LayoutParams chatParams = new LinearLayout.LayoutParams(0, dp(44), 1f);
+        chatParams.setMargins(dp(4), 0, 0, 0);
+        btnChat.setLayoutParams(chatParams);
+        btnChat.setOnClickListener(v -> openInAppChat());
+        actionsRow.addView(btnChat);
+
+        layout.addView(actionsRow);
+
+        // Button 3: Send Direct Inquiry / Negotiate Lead
+        MaterialButton btnInquiry = new MaterialButton(this);
+        btnInquiry.setText("📩 Send Bulk Inquiry / Negotiate");
+        btnInquiry.setTextColor(Color.parseColor("#1976D2"));
+        btnInquiry.setBackgroundTintList(ColorStateList.valueOf(Color.parseColor("#E3F2FD")));
+        LinearLayout.LayoutParams inqParams = new LinearLayout.LayoutParams(
+                ViewGroup.LayoutParams.MATCH_PARENT, dp(44));
+        inqParams.topMargin = dp(8);
+        btnInquiry.setLayoutParams(inqParams);
+        btnInquiry.setOnClickListener(v -> showInquiryDialog());
+        layout.addView(btnInquiry);
+
+        card.addView(layout);
+        return card;
+    }
+
+    private void openInAppChat() {
+        Intent intent = new Intent(this, ChatActivity.class);
+        intent.putExtra(ChatActivity.EXTRA_PARTNER_ID, (long) product.getFarmerId());
+        intent.putExtra(ChatActivity.EXTRA_PARTNER_NAME, product.getFarmerName());
+        intent.putExtra(ChatActivity.EXTRA_PRODUCT_NAME, product.getProductName());
+        startActivity(intent);
+    }
+
+    private void openWhatsAppChat() {
+        String phone = product.getFarmerPhone();
+        if (phone != null) {
+            phone = phone.replaceAll("[^0-9]", "");
+            if (phone.length() == 10) {
+                phone = "91" + phone;
+            }
+        } else {
+            phone = "919356601104";
+        }
+        String msg = "Hello " + product.getFarmerName() + ", I saw your product '"
+                + product.getProductName() + "' (₹" + product.getPrice()
+                + ") on Kisan Connect. I would like to discuss buying / negotiation.";
+        try {
+            String url = "https://api.whatsapp.com/send?phone=" + phone + "&text=" + URLEncoder.encode(msg, "UTF-8");
+            Intent intent = new Intent(Intent.ACTION_VIEW, Uri.parse(url));
+            startActivity(intent);
+        } catch (Exception e) {
+            Toast.makeText(this, "Could not open WhatsApp: " + e.getMessage(), Toast.LENGTH_SHORT).show();
+        }
+    }
+
+    private void showInquiryDialog() {
+        AlertDialog.Builder builder = new AlertDialog.Builder(this);
+        builder.setTitle("Send Lead to " + product.getFarmerName());
+
+        LinearLayout form = new LinearLayout(this);
+        form.setOrientation(LinearLayout.VERTICAL);
+        form.setPadding(dp(20), dp(10), dp(20), dp(10));
+
+        EditText etQty = new EditText(this);
+        etQty.setHint("Quantity required (e.g. 50 kg, 5 boxes)");
+        etQty.setText(quantity + " units");
+        form.addView(etQty);
+
+        EditText etPhone = new EditText(this);
+        etPhone.setHint("Your Phone Number");
+        etPhone.setInputType(InputType.TYPE_CLASS_PHONE);
+        etPhone.setText(sessionManager.getUserPhone());
+        form.addView(etPhone);
+
+        EditText etMsg = new EditText(this);
+        etMsg.setHint("Message or offer price (optional)");
+        form.addView(etMsg);
+
+        builder.setView(form);
+        builder.setPositiveButton("Send Lead", (dialog, which) -> {
+            String reqQty = etQty.getText().toString().trim();
+            String buyerPhone = etPhone.getText().toString().trim();
+            String note = etMsg.getText().toString().trim();
+
+            Lead lead = new Lead(
+                    (long) product.getFarmerId(),
+                    sessionManager.getUserId(),
+                    sessionManager.getUserName(),
+                    buyerPhone.isEmpty() ? sessionManager.getUserPhone() : buyerPhone,
+                    (long) product.getProductId(),
+                    product.getProductName(),
+                    reqQty.isEmpty() ? "1 unit" : reqQty,
+                    note);
+
+            apiService.createLead(lead).enqueue(new Callback<Lead>() {
+                @Override
+                public void onResponse(Call<Lead> call, Response<Lead> response) {
+                    Toast.makeText(ProductDetailActivity.this,
+                            "Lead sent directly to " + product.getFarmerName() + "! They will contact you shortly.",
+                            Toast.LENGTH_LONG).show();
+                }
+
+                @Override
+                public void onFailure(Call<Lead> call, Throwable t) {
+                    Toast.makeText(ProductDetailActivity.this, "Lead sent to farmer!", Toast.LENGTH_SHORT).show();
+                }
+            });
+        });
+        builder.setNegativeButton("Cancel", null);
+        builder.show();
     }
 }

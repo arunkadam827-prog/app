@@ -68,6 +68,7 @@ public class ProfileFragment extends Fragment {
 
         private Button editProfileButton;
         private Button logoutButton;
+        private Button switchRoleButton;
 
         private SessionManager sessionManager;
 
@@ -117,6 +118,7 @@ public class ProfileFragment extends Fragment {
                 settingsMenu = view.findViewById(R.id.settings_menu);
                 helpMenu = view.findViewById(R.id.help_menu);
 
+                switchRoleButton = view.findViewById(R.id.switch_role_button);
                 editProfileButton = view.findViewById(R.id.edit_profile_button);
                 logoutButton = view.findViewById(R.id.logout_button);
         }
@@ -278,6 +280,11 @@ public class ProfileFragment extends Fragment {
                 if (helpMenu != null) {
                         helpMenu.setOnClickListener(
                                         v -> startActivity(new Intent(requireContext(), HelpSupportActivity.class)));
+                }
+
+                if (switchRoleButton != null) {
+                        switchRoleButton.setOnClickListener(
+                                        v -> startActivity(new Intent(requireContext(), com.example.farmer.activities.FarmerDashboardActivity.class)));
                 }
 
                 if (editProfileButton != null) {

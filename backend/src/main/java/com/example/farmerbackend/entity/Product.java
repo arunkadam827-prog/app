@@ -56,7 +56,23 @@ public class Product {
     }
 
     public String getFarmerName() {
-        return farmer != null ? farmer.getFullName() : null;
+        return farmer != null ? farmer.getFullName() : "Kisan Producer";
+    }
+
+    public String getFarmerPhone() {
+        return farmer != null && farmer.getPhone() != null && !farmer.getPhone().isEmpty() ? farmer.getPhone() : "9356601104";
+    }
+
+    public String getFarmerCity() {
+        return farmer != null && farmer.getCity() != null && !farmer.getCity().isEmpty() ? farmer.getCity() : "Direct Farm";
+    }
+
+    public String getFarmerAddress() {
+        return farmer != null && farmer.getAddress() != null ? farmer.getAddress() : "Farm Direct Sourcing";
+    }
+
+    public boolean isDirectFromFarm() {
+        return farmer != null;
     }
 
     public String getProductName() { return productName; }

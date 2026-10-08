@@ -32,6 +32,24 @@
                 android:scaleType="centerCrop" />
 
             <TextView
+                android:id="@+id/badge_farm_direct"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="top|start"
+                android:layout_marginTop="@dimen/space_sm"
+                android:layout_marginStart="@dimen/space_sm"
+                android:background="@drawable/bg_pill_accent"
+                android:elevation="2dp"
+                android:paddingStart="@dimen/space_sm"
+                android:paddingTop="3dp"
+                android:paddingEnd="@dimen/space_sm"
+                android:paddingBottom="3dp"
+                android:text="🌱 Farm Direct"
+                android:textColor="@color/text_primary"
+                android:textSize="10sp"
+                android:textStyle="bold" />
+
+            <TextView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_gravity="top|end"
@@ -123,6 +141,17 @@
 
             </LinearLayout>
 
+            <TextView
+                android:id="@+id/product_farmer_name"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="4dp"
+                android:ellipsize="end"
+                android:maxLines="1"
+                android:text="👨‍🌾 Farmer"
+                android:textColor="@color/text_tertiary"
+                android:textSize="11sp" />
+
             <com.google.android.material.button.MaterialButton
                 android:id="@+id/btn_add_to_cart"
                 style="@style/Widget.Farmer.Button.Primary"
@@ -133,6 +162,21 @@
                 android:textSize="13sp"
                 app:cornerRadius="@dimen/radius_sm"
                 app:icon="@drawable/ic_cart"
+                app:iconGravity="textStart"
+                app:iconPadding="@dimen/space_sm"
+                app:iconSize="16dp" />
+
+            <com.google.android.material.button.MaterialButton
+                android:id="@+id/btn_contact_farmer"
+                style="@style/Widget.Farmer.Button.Secondary"
+                android:layout_width="match_parent"
+                android:layout_height="42dp"
+                android:layout_marginTop="@dimen/space_md"
+                android:text="@string/contact_farmer"
+                android:textSize="13sp"
+                android:visibility="gone"
+                app:cornerRadius="@dimen/radius_sm"
+                app:icon="@drawable/ic_chat"
                 app:iconGravity="textStart"
                 app:iconPadding="@dimen/space_sm"
                 app:iconSize="16dp" />

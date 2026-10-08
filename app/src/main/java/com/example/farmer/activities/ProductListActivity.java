@@ -65,6 +65,8 @@ public class ProductListActivity extends AppCompatActivity {
     private final List<Product> allProducts = new ArrayList<>();
     private String activeCategory = null;
     private String activeSearch = "";
+    private boolean farmDirectOnly = false;
+    private boolean farmerProductsOnly = false; // filter by current farmer's own products
 
     // Advanced filter state
     private Double minPrice = null;
@@ -90,6 +92,7 @@ public class ProductListActivity extends AppCompatActivity {
         recyclerView.setLayoutManager(new GridLayoutManager(this, 2));
         adapter = new ProductAdapter(this, this::addToCart);
         adapter.setOnProductClickListener(this::openProductDetail);
+        adapter.setOnContactFarmerClickListener(this::openProductDetail); // "Contact Farmer" opens detail
         recyclerView.setAdapter(adapter);
 
         // Back navigation (replaced the fragment's implicit back handling).
@@ -129,19 +132,39 @@ public class ProductListActivity extends AppCompatActivity {
         // Category chips
         View.OnClickListener chipListener = v -> {
             int id = v.getId();
-            if (id == R.id.filter_all)
+            if (id == R.id.filter_all) {
                 activeCategory = null;
-            else if (id == R.id.filter_vegetables)
+                farmDirectOnly = false;
+                farmerProductsOnly = false;
+            } else if (id == R.id.filter_farm_direct) {
+                activeCategory = null;
+                farmDirectOnly = true;
+                farmerProductsOnly = false;
+            } else if (id == R.id.filter_farmer_products) {
+                activeCategory = null;
+                farmDirectOnly = false;
+                farmerProductsOnly = true;
+            } else if (id == R.id.filter_vegetables) {
                 activeCategory = "Vegetables";
-            else if (id == R.id.filter_fruits)
+                farmDirectOnly = false;
+                farmerProductsOnly = false;
+            } else if (id == R.id.filter_fruits) {
                 activeCategory = "Fruits";
-            else if (id == R.id.filter_grains)
+                farmDirectOnly = false;
+                farmerProductsOnly = false;
+            } else if (id == R.id.filter_grains) {
                 activeCategory = "Grains";
-            else if (id == R.id.filter_others)
+                farmDirectOnly = false;
+                farmerProductsOnly = false;
+            } else if (id == R.id.filter_others) {
                 activeCategory = "Others";
+                farmDirectOnly = false;
+                farmerProductsOnly = false;
+            }
             applyFilters();
         };
-        int[] chips = { R.id.filter_all, R.id.filter_vegetables, R.id.filter_fruits,
+        int[] chips = { R.id.filter_all, R.id.filter_farm_direct, R.id.filter_farmer_products,
+                R.id.filter_vegetables, R.id.filter_fruits,
                 R.id.filter_grains, R.id.filter_others };
         for (int id : chips) {
             View chip = findViewById(id);
@@ -166,7 +189,11 @@ public class ProductListActivity extends AppCompatActivity {
 
     private void preselectChipForCategory() {
         int preset = R.id.filter_all;
-        if ("Vegetables".equalsIgnoreCase(activeCategory))
+        if (farmerProductsOnly)
+            preset = R.id.filter_farmer_products;
+        else if (farmDirectOnly)
+            preset = R.id.filter_farm_direct;
+        else if ("Vegetables".equalsIgnoreCase(activeCategory))
             preset = R.id.filter_vegetables;
         else if ("Fruits".equalsIgnoreCase(activeCategory))
             preset = R.id.filter_fruits;
@@ -184,6 +211,42 @@ public class ProductListActivity extends AppCompatActivity {
     private void fetchProducts() {
         if (progressBar != null) {
             progressBar.setVisibility(View.VISIBLE);
+        }
+
+        // When "Farmer Products" is active, fetch only the current farmer's products
+        if (farmerProductsOnly) {
+            SessionManager sm = new SessionManager(this);
+            long farmerId = sm.getUserId();
+            if (farmerId <= 0) {
+                showToast("Please log in as a farmer to see your products");
+                if (progressBar != null)
+                    progressBar.setVisibility(View.GONE);
+                return;
+            }
+            apiService.getFarmerProducts(farmerId).enqueue(new Callback<List<Product>>() {
+                @Override
+                public void onResponse(@NonNull Call<List<Product>> call, @NonNull Response<List<Product>> response) {
+                    if (progressBar != null)
+                        progressBar.setVisibility(View.GONE);
+                    if (response.isSuccessful() && response.body() != null) {
+                        allProducts.clear();
+                        allProducts.addAll(response.body());
+                        applyFilters();
+                    } else {
+                        Log.e("ProductListActivity", "API Error: " + response.message());
+                        showToast("Failed to load your products");
+                    }
+                }
+
+                @Override
+                public void onFailure(@NonNull Call<List<Product>> call, @NonNull Throwable t) {
+                    if (progressBar != null)
+                        progressBar.setVisibility(View.GONE);
+                    Log.e("ProductListActivity", "Network Error: " + t.getMessage());
+                    showToast("Cannot connect to backend server");
+                }
+            });
+            return;
         }
 
         apiService.getAllProducts().enqueue(new Callback<List<Product>>() {
@@ -234,7 +297,9 @@ public class ProductListActivity extends AppCompatActivity {
             if (maxPrice != null && price > maxPrice)
                 matchesPrice = false;
 
-            if (matchesSearch && matchesCategory && matchesPrice) {
+            boolean matchesFarm = !farmDirectOnly || p.isDirectFromFarm();
+
+            if (matchesSearch && matchesCategory && matchesPrice && matchesFarm) {
                 filtered.add(p);
             }
         }
@@ -280,6 +345,15 @@ public class ProductListActivity extends AppCompatActivity {
         RadioButton sortHigh = content.findViewById(R.id.sheet_sort_price_high);
         RadioButton sortRel = content.findViewById(R.id.sheet_sort_relevance);
 
+        // Pre-fill sourcing state
+        Chip sourceFarmChip = content.findViewById(R.id.sheet_source_farm);
+        Chip sourceAllChip = content.findViewById(R.id.sheet_source_all);
+        if (farmDirectOnly && sourceFarmChip != null) {
+            sourceFarmChip.setChecked(true);
+        } else if (sourceAllChip != null) {
+            sourceAllChip.setChecked(true);
+        }
+
         // Pre-fill current state
         int categoryChipId = R.id.sheet_cat_all;
         if ("Vegetables".equals(activeCategory))
@@ -311,6 +385,8 @@ public class ProductListActivity extends AppCompatActivity {
 
         content.findViewById(R.id.sheet_reset).setOnClickListener(v -> {
             activeCategory = null;
+            farmDirectOnly = false;
+            farmerProductsOnly = false;
             minPrice = null;
             maxPrice = null;
             sortMode = SortMode.RELEVANCE;
@@ -320,6 +396,9 @@ public class ProductListActivity extends AppCompatActivity {
         });
 
         content.findViewById(R.id.sheet_apply).setOnClickListener(v -> {
+            Chip farmChip = content.findViewById(R.id.sheet_source_farm);
+            farmDirectOnly = farmChip != null && farmChip.isChecked();
+
             if (((Chip) content.findViewById(R.id.sheet_cat_vegetables)).isChecked())
                 activeCategory = "Vegetables";
             else if (((Chip) content.findViewById(R.id.sheet_cat_fruits)).isChecked())

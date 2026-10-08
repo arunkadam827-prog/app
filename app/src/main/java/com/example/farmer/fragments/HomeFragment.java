@@ -69,6 +69,7 @@ public class HomeFragment extends Fragment {
 
     private String activeCategory = null;
     private String activeSearch = "";
+    private boolean farmDirectOnly = false;
     private Double minPrice = null;
     private Double maxPrice = null;
     private SortMode sortMode = SortMode.RELEVANCE;
@@ -175,21 +176,31 @@ public class HomeFragment extends Fragment {
     private void setupCategoryChips(View view) {
         View.OnClickListener chipListener = v -> {
             int id = v.getId();
-            if (id == R.id.home_filter_all)
+            if (id == R.id.home_filter_all) {
                 activeCategory = null;
-            else if (id == R.id.home_filter_vegetables)
+                farmDirectOnly = false;
+            } else if (id == R.id.home_filter_farm_direct) {
+                activeCategory = null;
+                farmDirectOnly = true;
+            } else if (id == R.id.home_filter_vegetables) {
                 activeCategory = "Vegetables";
-            else if (id == R.id.home_filter_fruits)
+                farmDirectOnly = false;
+            } else if (id == R.id.home_filter_fruits) {
                 activeCategory = "Fruits";
-            else if (id == R.id.home_filter_grains)
+                farmDirectOnly = false;
+            } else if (id == R.id.home_filter_grains) {
                 activeCategory = "Grains";
-            else if (id == R.id.home_filter_dairy)
+                farmDirectOnly = false;
+            } else if (id == R.id.home_filter_dairy) {
                 activeCategory = "Dairy";
-            else if (id == R.id.home_filter_others)
+                farmDirectOnly = false;
+            } else if (id == R.id.home_filter_others) {
                 activeCategory = "Others";
+                farmDirectOnly = false;
+            }
             applyFilters();
         };
-        int[] chips = { R.id.home_filter_all, R.id.home_filter_vegetables,
+        int[] chips = { R.id.home_filter_all, R.id.home_filter_farm_direct, R.id.home_filter_vegetables,
                 R.id.home_filter_fruits, R.id.home_filter_grains,
                 R.id.home_filter_dairy, R.id.home_filter_others };
         for (int id : chips) {
@@ -202,6 +213,7 @@ public class HomeFragment extends Fragment {
 
     private void selectCategory(String category) {
         activeCategory = category;
+        farmDirectOnly = false;
         syncChipsToCategory();
         applyFilters();
     }
@@ -211,7 +223,9 @@ public class HomeFragment extends Fragment {
             return;
         }
         int id = R.id.home_filter_all;
-        if ("Vegetables".equals(activeCategory))
+        if (farmDirectOnly)
+            id = R.id.home_filter_farm_direct;
+        else if ("Vegetables".equals(activeCategory))
             id = R.id.home_filter_vegetables;
         else if ("Fruits".equals(activeCategory))
             id = R.id.home_filter_fruits;
@@ -282,7 +296,9 @@ public class HomeFragment extends Fragment {
             if (maxPrice != null && price > maxPrice)
                 matchesPrice = false;
 
-            if (matchesSearch && matchesCategory && matchesPrice) {
+            boolean matchesFarm = !farmDirectOnly || p.isDirectFromFarm();
+
+            if (matchesSearch && matchesCategory && matchesPrice && matchesFarm) {
                 filtered.add(p);
             }
         }
@@ -334,6 +350,15 @@ public class HomeFragment extends Fragment {
         RadioButton sortHigh = content.findViewById(R.id.sheet_sort_price_high);
         RadioButton sortRel = content.findViewById(R.id.sheet_sort_relevance);
 
+        // Pre-fill sourcing state
+        Chip sourceFarmChip = content.findViewById(R.id.sheet_source_farm);
+        Chip sourceAllChip = content.findViewById(R.id.sheet_source_all);
+        if (farmDirectOnly && sourceFarmChip != null) {
+            sourceFarmChip.setChecked(true);
+        } else if (sourceAllChip != null) {
+            sourceAllChip.setChecked(true);
+        }
+
         // Pre-fill current state
         int categoryChipId = R.id.sheet_cat_all;
         if ("Vegetables".equals(activeCategory))
@@ -365,6 +390,7 @@ public class HomeFragment extends Fragment {
 
         content.findViewById(R.id.sheet_reset).setOnClickListener(v -> {
             activeCategory = null;
+            farmDirectOnly = false;
             minPrice = null;
             maxPrice = null;
             sortMode = SortMode.RELEVANCE;
@@ -374,6 +400,9 @@ public class HomeFragment extends Fragment {
         });
 
         content.findViewById(R.id.sheet_apply).setOnClickListener(v -> {
+            Chip farmChip = content.findViewById(R.id.sheet_source_farm);
+            farmDirectOnly = farmChip != null && farmChip.isChecked();
+
             if (((Chip) content.findViewById(R.id.sheet_cat_vegetables)).isChecked())
                 activeCategory = "Vegetables";
             else if (((Chip) content.findViewById(R.id.sheet_cat_fruits)).isChecked())

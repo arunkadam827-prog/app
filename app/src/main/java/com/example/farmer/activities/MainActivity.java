@@ -116,6 +116,8 @@ public class MainActivity extends AppCompatActivity {
 
             if (id == R.id.nav_logout) {
                 handleLogout();
+            } else if (id == R.id.nav_farmer_dashboard) {
+                startActivity(new Intent(MainActivity.this, FarmerDashboardActivity.class));
             } else if (id == R.id.nav_settings) {
                 // FIX: Changed lowercase 'settingsActivity' to standard 'SettingsActivity'
                 startActivity(new Intent(MainActivity.this, SettingsActivity.class));

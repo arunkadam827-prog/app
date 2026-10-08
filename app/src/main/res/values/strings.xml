@@ -40,6 +40,21 @@
     <string name="google_credential_unavailable">Google Play Services is not available on this device.</string>
     <string name="network_error">Network error. Check your connection.</string>
 
+    <!-- Server URL setting -->
+    <string name="server_url_title">Server URL</string>
+    <string name="server_url_subtitle">Address of the Farmer+ backend (e.g. http://192.168.1.5:8080)</string>
+    <string name="server_url_dialog_title">Server URL</string>
+    <string name="server_url_dialog_message">Enter the backend address running on your PC.\nFind it with: ipconfig → IPv4 Address.\nPhone and PC must be on the same Wi-Fi.</string>
+    <string name="server_url_hint">http://192.168.1.5:8080</string>
+    <string name="server_url_saved">Server URL saved</string>
+    <string name="server_url_reset">Using default server URL</string>
+    <string name="server_url_invalid">Enter a valid URL starting with http://</string>
+    <string name="server_url_test">Test connection</string>
+    <string name="server_url_testing">Testing connection…</string>
+    <string name="server_url_ok">Connected to server successfully ✓</string>
+    <string name="server_url_fail">Cannot reach server. Check the URL, that the backend is running, and that both devices are on the same Wi-Fi.</string>
+    <string name="server_url_default">Default</string>
+
     <!-- Actions -->
     <string name="add_to_cart">Add to cart</string>
     <string name="in_stock">In stock</string>
@@ -228,5 +243,60 @@
     <string name="order_success_title">Order confirmed</string>
     <string name="estimated_delivery">Estimated delivery: 2–3 business days</string>
     <string name="view_my_orders">View my orders</string>
+
+    <!-- Farmer: buyer inquiries / leads -->
+    <string name="leads_section_title">Buyer inquiries</string>
+    <string name="leads_subtitle_default">Buyers interested in your produce</string>
+    <string name="leads_subtitle_count">%1$d active buyer inquiries</string>
+    <string name="leads_sheet_title">Buyer inquiries and leads</string>
+    <string name="leads_sheet_subtitle">Buyers interested in your farm produce</string>
+    <string name="leads_sheet_close">Close buyer inquiries</string>
+    <string name="leads_empty_title">No inquiries yet</string>
+    <string name="leads_empty_subtitle">When buyers view your products in Farm Direct and send inquiries, they will appear here.</string>
+    <string name="leads_load_error">Could not load buyer inquiries</string>
+    <string name="lead_status_new">NEW INQUIRY</string>
+    <string name="lead_status_contacted">CONTACTED</string>
+    <string name="lead_status_closed">CLOSED</string>
+    <string name="lead_interested_buyer">Interested buyer</string>
+    <string name="lead_your_produce">Your farm produce</string>
+    <string name="lead_qty_not_specified">Not specified</string>
+    <string name="lead_recent_inquiry">Recent inquiry</string>
+    <string name="lead_enquired_on">Enquired on %1$s</string>
+    <string name="lead_call_buyer">Call Buyer</string>
+    <string name="lead_whatsapp">WhatsApp</string>
+    <string name="lead_chat_greeting">Hello %1$s, thank you for your inquiry about "%2$s" from our farm. Let us discuss the quantity, price and delivery.</string>
+    <string name="lead_no_contact">Buyer contact is not available yet</string>
+    <string name="lead_call_failed">No dialer app found on this device</string>
+    <string name="lead_share_failed">No app found to open WhatsApp</string>
+
+    <!-- Product card: farmer contact -->
+    <string name="contact_farmer">Contact Farmer</string>
+    <string name="view_farmer_details">View Farmer and Product Details</string>
+
+    <!-- Chat -->
+    <string name="chat">Chat</string>
+    <string name="chat_input_hint">Type your message…</string>
+    <string name="chat_empty_title">Start a conversation</string>
+    <string name="chat_empty_subtitle">Send a message to discuss pricing, quantity and delivery.</string>
+    <string name="chat_partner_info_product">Product: %1$s</string>
+    <string name="chat_partner_info_default">Let us discuss your farm produce</string>
+    <string name="chat_btn_chat">💬 Chat</string>
+
+    <!-- Kisan AI (customer support / chatbot) -->
+    <string name="ai_title">Kisan AI</string>
+    <string name="ai_subtitle">AI assistant • online</string>
+    <string name="ai_status_thinking">Kisan AI is thinking…</string>
+    <string name="ai_input_hint">Ask about products, orders, delivery…</string>
+    <string name="ai_typing">typing…</string>
+    <string name="ai_clear">New chat</string>
+    <string name="ai_open">Ask Kisan AI</string>
+    <string name="ai_open_subtitle">Instant answers on products, orders and selling</string>
+    <string name="ai_greeting">Namaste! 🌱 I am Kisan AI, your Farmer+ assistant. I can help you find fresh produce, track an order, understand payments and delivery, or start selling. What would you like to do?</string>
+    <string name="ai_error">Sorry, I could not answer that right now. Please try again.</string>
+    <string name="ai_network_error">I could not reach the server. Please check your connection and try again.</string>
+    <string name="ai_suggestion_products">What products are available?</string>
+    <string name="ai_suggestion_order">Track my order</string>
+    <string name="ai_suggestion_payment">Payment options</string>
+    <string name="ai_suggestion_support">Talk to support</string>
 
 </resources>

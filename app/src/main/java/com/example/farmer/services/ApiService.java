@@ -1,6 +1,8 @@
 package com.example.farmer.services;
 
 import com.example.farmer.models.*;
+import com.example.farmer.dto.AiChatRequest;
+import com.example.farmer.dto.AiChatResponse;
 import com.example.farmer.dto.LoginResponse;
 import com.example.farmer.dto.SocialLoginRequest;
 import java.util.List;
@@ -34,6 +36,9 @@ public interface ApiService {
     // @GetMapping("/list") to avoid conflict.
     @GET("api/products")
     Call<List<Product>> getAllProducts();
+
+    @GET("api/products/farmer/{farmerId}")
+    Call<List<Product>> getFarmerProducts(@Path("farmerId") Long farmerId);
 
     // ✅ FIX 2: Change 'int' to 'Long' to match your backend's expected
     // 'java.lang.Long' type.
@@ -69,4 +74,35 @@ public interface ApiService {
 
     @GET("api/orders/user/{userId}")
     Call<List<Order>> getUserOrders(@Path("userId") Long userId);
+
+    @POST("api/leads")
+    Call<Lead> createLead(@Body Lead lead);
+
+    @GET("api/leads/farmer/{farmerId}")
+    Call<List<Lead>> getFarmerLeads(@Path("farmerId") Long farmerId);
+
+    @PUT("api/leads/{id}/status")
+    Call<Lead> updateLeadStatus(@Path("id") Long leadId, @Query("status") String status);
+
+    // ── Chat ──
+    @POST("api/chat/send")
+    Call<ChatMessage> sendMessage(@Body ChatMessage message);
+
+    @GET("api/chat/conversation/{userId1}/{userId2}")
+    Call<List<ChatMessage>> getConversation(@Path("userId1") Long userId1,
+            @Path("userId2") Long userId2);
+
+    @GET("api/chat/conversations/{userId}")
+    Call<List<ChatMessage>> getRecentConversations(@Path("userId") Long userId);
+
+    @GET("api/chat/unread/{userId}")
+    Call<Map<String, Object>> getUnreadCount(@Path("userId") Long userId);
+
+    @PUT("api/chat/read/{userId}/{otherUserId}")
+    Call<Map<String, Object>> markConversationRead(@Path("userId") Long userId,
+            @Path("otherUserId") Long otherUserId);
+
+    // ── AI customer support / chatbot ──
+    @POST("api/ai/chat")
+    Call<AiChatResponse> aiChat(@Body AiChatRequest request);
 }

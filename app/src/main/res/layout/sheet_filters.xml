@@ -47,6 +47,50 @@
             app:tint="@color/text_secondary" />
     </LinearLayout>
 
+    <!-- Sourcing -->
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="@dimen/space_xl"
+        android:layout_marginBottom="@dimen/space_sm"
+        android:text="Sourcing"
+        android:textColor="@color/text_primary"
+        android:textSize="15sp"
+        android:textStyle="bold" />
+
+    <com.google.android.material.chip.ChipGroup
+        android:id="@+id/sheet_sourcing_group"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        app:chipSpacingHorizontal="@dimen/space_sm"
+        app:singleSelection="true">
+
+        <com.google.android.material.chip.Chip
+            android:id="@+id/sheet_source_all"
+            style="@style/Widget.MaterialComponents.Chip.Choice"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:checkable="true"
+            android:checked="true"
+            android:text="All Products"
+            android:textColor="@color/selector_chip_text"
+            app:checkedIconVisible="false"
+            app:chipBackgroundColor="@color/selector_chip_bg"
+            app:chipCornerRadius="@dimen/radius_pill" />
+
+        <com.google.android.material.chip.Chip
+            android:id="@+id/sheet_source_farm"
+            style="@style/Widget.MaterialComponents.Chip.Choice"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:checkable="true"
+            android:text="🌱 Direct from Farm"
+            android:textColor="@color/selector_chip_text"
+            app:checkedIconVisible="false"
+            app:chipBackgroundColor="@color/selector_chip_bg"
+            app:chipCornerRadius="@dimen/radius_pill" />
+    </com.google.android.material.chip.ChipGroup>
+
     <!-- Category -->
     <TextView
         android:layout_width="wrap_content"
